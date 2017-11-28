@@ -5,6 +5,12 @@ node{
         sh './gradlew compileTestJava'
     }
     stage("Test"){
-        echo "In stage Test"
+        try{
+            sh './gradlew test'
+        }
+        finally{
+            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+            junit 'build/reports/**/*.xml'
+        }
     }
 }
