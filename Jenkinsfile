@@ -9,7 +9,6 @@ node{
             sh './gradlew test'
         }
         finally{
-            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
             junit 'build/reports/**/*.xml'
         }
     }
