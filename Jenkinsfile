@@ -1,18 +1,9 @@
 node{
-    stage('Emma'){
-        echo "Hello Emma"
+    stage('Compile'){
+        git credentialsId: '37cc48bd-981d-4263-96be-86b430cefdcd', url: 'https://github.com/EmmaEyckmans/DevopsJenkins.git'
+        gradlew compile
     }
-    stage("is"){
+    stage("Test"){
         echo "In stage IS"
-    }
-    stage("Proceed?"){
-        milestone()
-        input "Continue?"
-        milestone()
-        echo "In stage PROCEED"
-    }
-    stage("the best!"){
-        milestone()
-        echo "In stage BEST"
     }
 }
