@@ -9,7 +9,7 @@ node{
             sh './gradlew test'
         }
         finally{
-            junit 'build/reports/**/*.html'
+            junit 'build/test-results/**/*.xml'
         }
     }
 }
