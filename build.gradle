@@ -1,0 +1,49 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+
+group 'be.cegeka.emmae'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+repositories{
+    mavenCentral()
+}
+
+// Lab 3.1 Copy task
+task copyDocs(type: Copy){
+    into "$buildDir/documentation"
+    from 'src/main/doc'
+    exclude '*.gif'
+    expand(version : version)
+    filter(ReplaceTokens, tokens: [VERSION: version])
+//    expand(version: "$version") alternatief
+//    include '*.md'
+//    exclude('*.gif')
+}
+
+task runMain(type: JavaExec) {
+    group = 'application'
+    dependsOn 'classes'
+    main = 'HelloWorld'
+    classpath = sourceSets.main.runtimeClasspath
+    doFirst{ //Force this to be executed in the execution phase instead of configuration phase.
+        args = [System.getProperty('name')]
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.assertj', name: 'assertj-core', version: '3.8.0'
+}
+
+subprojects{
+    task doIt{
+        doLast{
+            println "Just do it! https://www.youtube.com/watch?v=ZXsQAXx_ao0"
+        }
+    }
+}
+
+// Run doIt voor een specifiek subproject: gradlew :subproject1:doIt
+
