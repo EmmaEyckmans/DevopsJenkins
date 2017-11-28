@@ -10,7 +10,7 @@ public class GreeterTest {
 
     @Test
     public void greet(){
-        String result = greeter.greet("Emmalala");
+        String result = greeter.greet("Emma");
 
         assertEquals("Hello Emma!", result);
         assertThat("Hello Emma!").isEqualTo(result);
